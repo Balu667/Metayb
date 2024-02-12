@@ -55,7 +55,6 @@ const useCompleteAssembleBike = () => {
 };
 
 const useGetProgressAssembleBikesByEmployeeId = (id) => {
-  const queryClient = useQueryClient();
   return useQuery({
     queryKey: ["getProgressAssembleBikes", id],
     queryFn: ({ queryKey }) =>
@@ -88,7 +87,6 @@ const useGetAssembleBikes =  (onSucessFn) => {
     onSuccess: (data) => {
       onSucessFn(JSON.parse(data.data));
       queryClient.invalidateQueries({ queryKey: ["getAssembleBikes"] });
-      // toast.success(data.response);
     },
     onError: (error) => {
       toast.error(error.message.split(":")[1]);
@@ -102,8 +100,6 @@ const useGetAssembleBikesByEmployeeId =  (onSucessFn) => {
     mutationFn: (data) => getAllAssembleBikesByEmpId(data),
     onSuccess: (data) => {
       onSucessFn(JSON.parse(data.data));
-      // queryClient.invalidateQueries({ queryKey: ["getAssembleBikes"] });
-      // toast.success(data.response);
     },
     onError: (error) => {
       toast.error(error.message.split(":")[1]);
