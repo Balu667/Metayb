@@ -2,6 +2,31 @@ const User = require("../schema/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+
+const registerUser = async (req, res) => {
+  const { role, password, email, username } = req.body;
+  let userExist, hashPass, registerUser;
+  try {
+    userExist = await User.findOne({ email: email });
+    if (userExist != null) {
+      return res.send({ status: 0, response: "User already exist" });
+    }
+    hashPass = await bcrypt.hash(password, 10);
+    registerUser = await User.create({
+      username: username,
+      password: hashPass,
+      email: email,
+      role: role,
+    });
+    if (registerUser) {
+      return res.status(200).send({ status: 1, response: "Registration Successfully" });
+    }
+    return res.status(400).send({ status: 0, response: "Invalid request" });
+  } catch (error) {
+    res.status(500).send({ status: 0, response: error.message });
+  }
+};
+
 const loginUser = async (req, res) => {
   const { password, email } = req.body;
   let userExist, matchPass, accessToken;
@@ -65,6 +90,7 @@ const getAllUsers = async (req, res) => {
 
 module.exports = {
   loginUser,
+  registerUser,
   logoutUser,
   getAllUsers
 };

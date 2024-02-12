@@ -5,6 +5,24 @@ const { check, validationResult } = require('express-validator')
 module.exports = function (app, io) {
     let data = { status: 0, response: 'Invalid Request' }, validator = {}
 
+    validator.registerUser = [
+        check('role').notEmpty().withMessage('role cannot be empty').isNumeric('role must be number'),
+        check('password').notEmpty().withMessage('password cannot be empty'),
+        check('email').notEmpty().withMessage('email cannot be empty').isEmail().withMessage('Invalid email'),
+        check('username').notEmpty().withMessage('username cannot be empty'),
+        (req, res, next) => {
+            const errors = validationResult(req).array();
+            if (errors.length > 0) {
+                data.response = errors[0].msg;
+
+                return res.send(data);
+            }
+
+            return next();
+        }
+    ]
+
+    
     validator.loginUser = [
         check('email').isEmail().withMessage('Invalid email'),
         check('password').notEmpty().withMessage('password cannot be empty'),
