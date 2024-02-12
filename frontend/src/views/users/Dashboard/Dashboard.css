@@ -1,0 +1,11 @@
+.dashboard-section{
+    margin-top: 50px;
+    padding: 50px 50px;
+    min-height: 100vh;
+    background: #ded0d042;
+}
+
+.bikes-section{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}

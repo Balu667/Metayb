@@ -1,0 +1,27 @@
+.bike-cardsection{
+ border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 15px 15px 15px;
+  background-color: #fff;
+  flex-wrap: wrap;
+}
+
+.bike-image{
+  height: 150px;
+  width: auto;
+}
+
+.progress-btn{
+  background-color: green !important;
+}
+
+.content{
+  padding: 10px;
+}

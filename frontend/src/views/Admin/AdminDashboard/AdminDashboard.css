@@ -1,0 +1,46 @@
+.dashboard-section{
+    margin-top: 50px;
+    padding: 30px 50px;
+    background: #ded0d042;
+}
+.heading-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+.datepicker-container{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.datepicker-container p {
+    font-weight: 500;
+    margin: 0;
+} 
+
+.date-picker{
+    font-size: 16px !important;
+}
+
+.btn-container{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.select-container{
+    width: 200px;
+}
+
+.chart-section{
+    background-color: #343333;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+}
+
+
