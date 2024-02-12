@@ -9,18 +9,19 @@ const {
   getAssembleBikesByEmpId,
 } = require("../controllers/bike");
 const { verifyToken } = require("../auth/auth");
+const validation = require("../validations/validation")();
 
 const bikeRouter = express.Router();
 
 bikeRouter.get("/getAllBikes", verifyToken, getAllBikes);
-bikeRouter.post("/insertBike", insertBike);
-bikeRouter.post("/startAssembleBike", verifyToken, startAssembleBike);
-bikeRouter.post("/completeAssembleBike", verifyToken, completeAssembleBike);
+bikeRouter.post("/insertBike", validation.insertBike, insertBike);
+bikeRouter.post("/startAssembleBike", validation.startAssembleBike, verifyToken, startAssembleBike);
+bikeRouter.post("/completeAssembleBike", validation.completeAssembleBike, verifyToken, completeAssembleBike);
 bikeRouter.post(
-  "/getProgressAssembleBikeByEmployeeId", verifyToken,
+  "/getProgressAssembleBikeByEmployeeId", validation.getAssembleBikesByEmpId, verifyToken,
   progressAssembleBikeByEmployeeId
 );
 bikeRouter.post("/getAllAssembleBikes", verifyToken, getAllAssembleBikes);
-bikeRouter.post("/getAssembleBikesByEmpId", verifyToken, getAssembleBikesByEmpId);
+bikeRouter.post("/getAssembleBikesByEmpId", validation.getAssembleBikesByEmpId, verifyToken, getAssembleBikesByEmpId);
 
 module.exports = bikeRouter;
