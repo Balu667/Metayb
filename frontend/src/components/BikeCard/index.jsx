@@ -68,12 +68,13 @@ const BikeCard = ({ bikeData, progressAssembleData }) => {
       </div>
       <div>
         <button
+          
           className={
             progressAssembleData.find((item) => item.bikeId === bikeData._id)
               ? "progress-btn primary-btn"
               : "Assemble primary-btn"
           }
-          disabled={progressAssembleData.length > 0}
+          disabled={progressAssembleData.length > 0 || isLoading}
           onClick={() => startBikeAssembleFn(bikeData._id)}
         >
           {progressAssembleData.find((item) => item.bikeId === bikeData._id)

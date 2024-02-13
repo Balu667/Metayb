@@ -113,9 +113,6 @@ const AdminDashboard = () => {
               </InputLabel>
               <Select
                 size="small"
-                slotProps={{
-                  textField: "small",
-                }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={selectedEmployee}
