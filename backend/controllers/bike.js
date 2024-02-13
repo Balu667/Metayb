@@ -17,10 +17,9 @@ const getAllBikes = async (req, res) => {
                 .send({ status: 1, data: JSON.stringify(bikeData) });
         }
 
-        res.status(500).send(data);
+        return res.status(400).send(data);
     } catch (error) {
-        data.response = error.message;
-        res.status(500).send(data);
+        return res.status(500).send({ status: 0, response: error.message })
     }
 };
 
@@ -30,7 +29,7 @@ const insertBike = async (req, res) => {
 
     try {
         let { name, assembleTime } = req.body, files = req.files, imagePath;
-        imagePath = path.join(__dirname , '..', 'fileUploads', files[0].originalname)
+        imagePath = path.join(__dirname, '..', 'fileUploads', files[0].originalname)
         fs.writeFileSync(imagePath, files[0].buffer);
         insertBike = await Bike.create({
             name,
@@ -44,10 +43,9 @@ const insertBike = async (req, res) => {
                 .send({ status: 1, response: "Bike inserted successfully" });
         }
 
-        res.status(500).send(data);
+        return res.status(400).send(data);
     } catch (error) {
-        data.response = error.message;
-        res.status(500).send(data);
+        return res.status(500).send({ status: 0, response: error.message })
     }
 };
 
@@ -101,10 +99,9 @@ const startAssembleBike = async (req, res) => {
                 });
         }
 
-        res.status(500).send(data);
+        return res.status(400).send(data);
     } catch (error) {
-        data.response = error.message;
-        res.status(500).send(data);
+        return res.status(500).send({ status: 0, response: error.message })
     }
 };
 
@@ -132,10 +129,9 @@ const progressAssembleBikeByEmployeeId = async (req, res) => {
                 .send({ status: 1, data: JSON.stringify(bikeData) });
         }
 
-        res.status(500).send(data);
+        return res.status(400).send(data);
     } catch (error) {
-        data.response = error.message;
-        res.status(500).send(data);
+        return res.status(500).send({ status: 0, response: error.message })
     }
 };
 
@@ -164,10 +160,9 @@ const completeAssembleBike = async (req, res) => {
                 .send({ status: 1, response: "Bike Assemble completed !" });
         }
 
-        res.status(500).send(data);
+        return res.status(400).send(data);
     } catch (error) {
-        data.response = error.message;
-        res.status(500).send(data);
+        return res.status(500).send({ status: 0, response: error.message })
     }
 };
 
@@ -221,18 +216,18 @@ const getAllAssembleBikes = async (req, res) => {
                 },
             },
         ]);
-        if (assembleBikeData) {
-            return res
-                .status(200)
-                .send({ status: 1, data: JSON.stringify(assembleBikeData) });
-        }
 
-        res.status(500).send(data);
+        if (assembleBikeData) {
+            return res.status(200).send({ status: 1, data: JSON.stringify(assembleBikeData) });
+        }
+        return res.status(400).send(data);
+
+
     } catch (error) {
-        data.response = error.message;
-        res.status(500).send(data);
+        return res.status(500).send({ status: 0, response: error });
     }
 };
+
 
 const getAssembleBikesByEmpId = async (req, res) => {
     let data = { status: 0, response: "Invalid request" },
@@ -244,7 +239,7 @@ const getAssembleBikesByEmpId = async (req, res) => {
 
         if (date) {
             startDate = new Date(date);
-            startDate.setHours(0, 0, 0, 0); 
+            startDate.setHours(0, 0, 0, 0);
             const endDate = new Date(date);
             endDate.setHours(23, 59, 59, 999);
             query.startTime = { $gte: startDate, $lte: endDate };
@@ -291,10 +286,9 @@ const getAssembleBikesByEmpId = async (req, res) => {
                 .send({ status: 1, data: JSON.stringify(assembleBikeData) });
         }
 
-        res.status(500).send(data);
+        return res.status(400).send(data);
     } catch (error) {
-        data.response = error.message;
-        res.status(500).send(data);
+        return res.status(500).send({ status: 0, response: error.message })
     }
 };
 

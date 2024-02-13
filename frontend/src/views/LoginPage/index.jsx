@@ -2,7 +2,6 @@ import { AiFillEye } from "react-icons/ai";
 import { BsFillEyeSlashFill } from "react-icons/bs";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginValidation } from "../../validationSchema/loginValidation";
 import { Controller, useForm } from "react-hook-form";
@@ -30,7 +29,6 @@ const Loginpage = () => {
 			password: "",
 		},
 	});
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const loginData = useMutation({
 		mutationFn: (data) => logInApi(data),
@@ -145,7 +143,7 @@ const Loginpage = () => {
 							id="Signin"
 							className="primary-btn w-100 mt-4">
 							{loginData.isLoading ? (
-								<CircularProgress />
+								<CircularProgress sx={{color: "#fff"}} />
 							) : (
 								"Sign In"
 							)}

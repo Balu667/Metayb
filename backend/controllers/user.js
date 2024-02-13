@@ -23,7 +23,7 @@ const registerUser = async (req, res) => {
     }
     return res.status(400).send({ status: 0, response: "Invalid request" });
   } catch (error) {
-    res.status(500).send({ status: 0, response: error.message });
+    return res.status(500).send({ status: 0, response: error.message });
   }
 };
 
@@ -57,7 +57,7 @@ const loginUser = async (req, res) => {
       token: accessToken,
     });
   } catch (error) {
-    res.send({ status: 0, response: error.message });
+    return res.send({ status: 0, response: error.message });
   }
 };
 
@@ -68,23 +68,23 @@ const logoutUser = async (req, res) => {
     if (userExist == null) {
       return res.status(400).send(data);
     }
-     res.status(200).send({ status: 1, response: "Logged out in Successfully" });
+    return res.status(200).send({ status: 1, response: "Logged out in Successfully" });
   } catch (error) {
-    res.status(500).send({ status: 0, response: error.message });
+    return res.status(500).send({ status: 0, response: error.message });
   }
 };
 
 const getAllUsers = async (req, res) => {
   let users, data = { status: 0, response: "Invalid request" }
   try {
-    users = await User.find({ role: 1}, {password: 0, createdAt: 0, updatedAt: 0, role: 0});
-    if(users){
+    users = await User.find({ role: 1 }, { password: 0, createdAt: 0, updatedAt: 0, role: 0 });
+    if (users) {
 
       return res.status(200).send({ status: 1, data: JSON.stringify(users) });
     }
-    res.send(data)
+    return res.send(data)
   } catch (error) {
-    res.status(500).send({ status: 0, response: error.message });
+    return res.status(500).send({ status: 0, response: error.message });
   }
 };
 

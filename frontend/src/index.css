@@ -116,3 +116,12 @@ code {
   p{
     margin: 0;
   }
+
+  @media only screen and (max-width: 600px) {
+    .bike-section{
+      grid-template-columns: 1f !important;
+    }
+    .bike-image{
+      height: 100px;
+    }
+  }

@@ -45,9 +45,6 @@ const AdminDashboard = () => {
   }, [startDate, endDate]);
 
   useEffect(() => {
-    if (!employeeLoading) {
-      setSelectedEmployee(employeeData[0]._id);
-    }
     if (selectedEmployee) {
       getAssembleBikesByEmpIdMutate({
         employeeId: selectedEmployee,
@@ -115,7 +112,6 @@ const AdminDashboard = () => {
                 Select Employee
               </InputLabel>
               <Select
-                sx={{ height: "" }}
                 size="small"
                 slotProps={{
                   textField: "small",
